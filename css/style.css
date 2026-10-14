@@ -130,6 +130,25 @@ svg { display: block; }
 [data-action="mute"] svg { fill: none; stroke-width: 2; }
 [data-action="mute"] .i-vol path { fill: none; }
 [data-action="mute"][aria-pressed="true"] { background: var(--sage-soft); }
+[data-action="mode"] svg { fill: none; stroke-width: 2; }
+[data-action="mode"] svg:not(.i-order) { display: none; }
+body[data-mode="one"] [data-action="mode"] .i-order, body[data-mode="shuffle"] [data-action="mode"] .i-order { display: none; }
+body[data-mode="one"] [data-action="mode"] .i-one, body[data-mode="shuffle"] [data-action="mode"] .i-shuffle { display: block; }
+body[data-mode="one"] [data-action="mode"], body[data-mode="shuffle"] [data-action="mode"] { background: var(--rose-soft); }
+
+/* 切换播放模式时的小提示 */
+.mode-toast {
+  position: fixed; left: 50%; bottom: calc(var(--mini-h, 0px) + 8px); z-index: 60;
+  margin: 0; padding: 6px 16px;
+  background: var(--ink); color: var(--paper);
+  border-radius: 999px;
+  font-size: .95rem;
+  pointer-events: none;
+  opacity: 0; transform: translate(-50%, 6px);
+  transition: opacity .2s, transform .2s;
+}
+.player-card .mode-toast { position: absolute; top: 18px; bottom: auto; }
+.mode-toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 .i-pause, .i-mute { display: none !important; }
 body.is-playing [data-action="toggle"] .i-play { display: none !important; }
@@ -593,7 +612,7 @@ body.is-playing .mini-disc { animation-play-state: running; }
 
 .mini-progress { grid-area: progress; display: flex; align-items: center; gap: 10px; }
 .time { flex: none; font-family: var(--f-type); font-size: .75rem; color: var(--ink-soft); min-width: 2.8em; text-align: center; }
-.mini-controls { grid-area: controls; display: flex; justify-content: center; align-items: center; gap: 16px; }
+.mini-controls { grid-area: controls; display: flex; justify-content: center; align-items: center; gap: 10px; }
 
 /* 嵌入视频没法从外面控制进度 */
 body[data-kind="embed"] .mini-progress, body[data-kind="none"] .mini-progress { visibility: hidden; }

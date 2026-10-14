@@ -15,6 +15,11 @@
     duration: (t.duration || "").trim(),
     note: (t.note || "").trim(),
   }));
+  // 每次进入页面都随机打乱歌单顺序
+  for (let i = tracks.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [tracks[i], tracks[j]] = [tracks[j], tracks[i]];
+  }
 
   /** "file" = 本地/直链视频，"embed" = iframe 嵌入，"none" = 还没有视频 */
   const kindOf = (url) => {
@@ -70,6 +75,14 @@
   let current = -1;
   let seeking = false;
 
+  /* 播放模式：依次播放 / 单曲循环 / 随机播放 */
+  const MODES = { order: "依次播放", one: "单曲循环", shuffle: "随机播放" };
+  const MODE_KEYS = Object.keys(MODES);
+  let mode = "order";
+  try { if (MODES[localStorage.getItem("playMode")]) mode = localStorage.getItem("playMode"); } catch (_) {}
+  let history = []; // 随机播放时听过的曲目，给“上一首”用
+  let bag = []; // 随机播放这一轮还没轮到的曲目
+
   const setPlaying = (on) => {
     document.body.classList.toggle("is-playing", on);
     $$('[data-action="toggle"]').forEach((b) => b.setAttribute("aria-label", on ? "暂停" : "播放"));
@@ -116,8 +129,8 @@
       if (+c.dataset.index === i) c.setAttribute("aria-current", "true");
       else c.removeAttribute("aria-current");
     });
-    $$('[data-action="prev"]').forEach((b) => (b.disabled = i === 0));
-    $$('[data-action="next"]').forEach((b) => (b.disabled = i === tracks.length - 1));
+    bag = bag.filter((x) => x !== i);
+    updateNav();
 
     hint.hidden = true;
     msg.hidden = true;
@@ -134,6 +147,7 @@
     embed.hidden = kind !== "embed";
 
     if (kind === "file") {
+      video.loop = mode === "one";
       video.poster = t.thumbnail || "";
       video.src = t.videoUrl;
       video.load();
@@ -145,17 +159,76 @@
     }
   }
 
+  function updateNav() {
+    const shuffle = mode === "shuffle";
+    $$('[data-action="prev"]').forEach((b) => (b.disabled = shuffle ? !history.length : current <= 0));
+    $$('[data-action="next"]').forEach((b) => (b.disabled = shuffle ? tracks.length < 2 : current === tracks.length - 1));
+  }
+
+  // 切到另一首，并记进随机播放的历史
+  function jump(i) {
+    if (current >= 0 && i !== current) history = [...history, current].slice(-50);
+    load(i, true);
+  }
+
+  function nextShuffle() {
+    if (!bag.length) {
+      bag = tracks.map((_, k) => k).filter((k) => k !== current);
+      for (let k = bag.length - 1; k > 0; k--) {
+        const j = Math.floor(Math.random() * (k + 1));
+        [bag[k], bag[j]] = [bag[j], bag[k]];
+      }
+    }
+    return bag.pop();
+  }
+
   function openTrack(i, autoplay = true) {
-    if (i !== current) load(i, autoplay);
+    if (i !== current) {
+      if (current >= 0) history = [...history, current].slice(-50);
+      load(i, autoplay);
+    }
     else if (autoplay && kindOf(tracks[i].videoUrl) === "file" && video.paused) video.play().catch(() => {});
     if (!player.open) player.showModal();
   }
 
   const go = (delta) => {
+    if (mode === "shuffle") {
+      if (delta > 0) return tracks.length > 1 && jump(nextShuffle());
+      if (history.length) load(history.pop(), true);
+      return;
+    }
     const next = current + delta;
     if (next < 0 || next >= tracks.length) return;
-    load(next, true);
+    jump(next);
   };
+
+  const modeBtns = $$('[data-action="mode"]');
+  const toast = document.createElement("p");
+  toast.className = "mode-toast";
+  toast.setAttribute("role", "status");
+  let toastTimer;
+
+  function setMode(m, announce) {
+    mode = m;
+    document.body.dataset.mode = m;
+    video.loop = m === "one";
+    modeBtns.forEach((b) => {
+      b.setAttribute("aria-label", `播放模式：${MODES[m]}，点击切换`);
+      b.title = MODES[m];
+    });
+    updateNav();
+    try { localStorage.setItem("playMode", m); } catch (_) {}
+    if (!announce) return;
+    // 面板打开时提示放在面板里，否则放在页面底部
+    (player.open ? $(".player-card") : document.body).appendChild(toast);
+    toast.textContent = MODES[m];
+    toast.classList.remove("show");
+    void toast.offsetWidth;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 1400);
+  }
+  setMode(mode, false);
 
   const toggle = () => {
     if (current < 0) return openTrack(0);
@@ -177,6 +250,7 @@
     else if (action === "next") go(1);
     else if (action === "toggle") toggle();
     else if (action === "mute") toggleMute();
+    else if (action === "mode") setMode(MODE_KEYS[(MODE_KEYS.indexOf(mode) + 1) % MODE_KEYS.length], true);
   });
 
   list.addEventListener("click", (e) => {
@@ -219,11 +293,12 @@
       b.setAttribute("aria-label", video.muted ? "取消静音" : "静音");
     });
   });
+  // 单曲循环由 video.loop 处理，不会触发 ended
   video.addEventListener("ended", () => {
     setPlaying(false);
-    const last = current === tracks.length - 1;
-    hintText.textContent = last ? "全部听完啦，谢谢你 🐙" : "下一首也准备好啦";
-    hintBtn.hidden = last;
+    if (mode === "shuffle" || current < tracks.length - 1) return go(1);
+    hintText.textContent = "全部听完啦，谢谢你 🐙";
+    hintBtn.hidden = true;
     hint.hidden = false;
   });
   video.addEventListener("error", () => {
