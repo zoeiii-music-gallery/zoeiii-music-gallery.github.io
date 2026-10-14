@@ -18,13 +18,12 @@
 /* 视频所在的位置（末尾要带 /）：
  *   本地预览：  "media/"
  *   腾讯云 COS："https://zoeiiimusic-1506055688.cos.ap-shanghai.myqcloud.com/"
- * 只改这一行，17 首就都换过去了。 */
+ * 只改这一行，所有视频就都换过去了。 */
 const VIDEO_BASE = "https://zoeiiimusic-1506055688.cos.ap-shanghai.myqcloud.com/";
 
 window.TRACKS = [
   { title: "Never Let Me Go", videoUrl: VIDEO_BASE + "Never_Let_Me_Go.MP4", thumbnail: "media/covers/01.jpg", duration: "3:34", note: "" }, // 原文件 IMG_5678.MP4
   { title: "Video Games", videoUrl: VIDEO_BASE + "Video_Games.MP4", thumbnail: "media/covers/02.jpg", duration: "5:38", note: "" }, // 原文件 IMG_5931.MP4
-  { title: "TV in Black and White（即兴乱弹）", videoUrl: VIDEO_BASE + "TV_in_Black_and_White_即兴乱弹.MP4", thumbnail: "media/covers/03.jpg", duration: "3:16", note: "" }, // 原文件 IMG_6298.MP4
   { title: "Money Power Glory", videoUrl: VIDEO_BASE + "Money_Power_Glory.mp4", thumbnail: "media/covers/04.jpg", duration: "4:15", note: "" }, // 原文件 IMG_6308.MOV
   { title: "Swan Song", videoUrl: VIDEO_BASE + "Swan_Song.mp4", thumbnail: "media/covers/05.jpg", duration: "5:20", note: "" }, // 原文件 IMG_6345.MOV
   { title: "West Coast", videoUrl: VIDEO_BASE + "West_Coast.mp4", thumbnail: "media/covers/06.jpg", duration: "4:09", note: "" }, // 原文件 9296.mp4
