@@ -366,10 +366,10 @@
     setTimeout(remove, 2000); // 兜底
   }
 
-  const SAYINGS = ["被你发现啦", "这首也很好听", "下一首也不错哦", "章鱼也在认真听", "八只脚一起打拍子", "听累了记得喝口水"];
+  const SAYINGS = ["被你发现啦", "这首也就还行吧", "好了到我玩了", "别摘我耳机嗷", "嘿嘿，你敢再戳一下？", "今天也要听歌歌"];
   const octoBtn = $(".octo-btn");
   const say = $(".octo-say");
-  let sayIdx = 0;
+  let sayIdx = Math.floor(Math.random() * SAYINGS.length); // 每次从随机一句开始
   let shyTimer;
   let sayTimer;
 
