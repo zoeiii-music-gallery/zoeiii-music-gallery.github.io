@@ -17,26 +17,26 @@
 
 /* 视频所在的位置（末尾要带 /）：
  *   本地预览：  "media/"
- *   阿里云 OSS："https://你的bucket名.oss-cn-hangzhou.aliyuncs.com/lana/"
+ *   腾讯云 COS："https://zoeiiimusic-1506055688.cos.ap-shanghai.myqcloud.com/"
  * 只改这一行，17 首就都换过去了。 */
-const VIDEO_BASE = "media/";
+const VIDEO_BASE = "https://zoeiiimusic-1506055688.cos.ap-shanghai.myqcloud.com/";
 
 window.TRACKS = [
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "01.mp4", thumbnail: "media/covers/01.jpg", duration: "3:34", note: "" }, // 原文件 IMG_5678.MP4
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "02.mp4", thumbnail: "media/covers/02.jpg", duration: "5:38", note: "" }, // 原文件 IMG_5931.MP4
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "03.mp4", thumbnail: "media/covers/03.jpg", duration: "3:16", note: "" }, // 原文件 IMG_6298.MP4
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "04.mp4", thumbnail: "media/covers/04.jpg", duration: "4:15", note: "" }, // 原文件 IMG_6308.MOV
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "05.mp4", thumbnail: "media/covers/05.jpg", duration: "5:20", note: "" }, // 原文件 IMG_6345.MOV
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "06.mp4", thumbnail: "media/covers/06.jpg", duration: "4:09", note: "" }, // 原文件 9296.mp4
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "07.mp4", thumbnail: "media/covers/07.jpg", duration: "3:26", note: "" }, // 原文件 IMG_6314.MP4
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "08.mp4", thumbnail: "media/covers/08.jpg", duration: "4:05", note: "" }, // 原文件 IMG_6399.MOV
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "09.mp4", thumbnail: "media/covers/09.jpg", duration: "3:39", note: "" }, // 原文件 IMG_6447.MP4
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "10.mp4", thumbnail: "media/covers/10.jpg", duration: "3:31", note: "" }, // 原文件 IMG_6430.MP4
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "11.mp4", thumbnail: "media/covers/11.jpg", duration: "3:20", note: "" }, // 原文件 IMG_6526.MP4
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "12.mp4", thumbnail: "media/covers/12.jpg", duration: "5:04", note: "" }, // 原文件 IMG_6507.MP4
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "13.mp4", thumbnail: "media/covers/13.jpg", duration: "4:22", note: "" }, // 原文件 IMG_6537.MP4
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "14.mp4", thumbnail: "media/covers/14.jpg", duration: "3:52", note: "" }, // 原文件 IMG_6577.MP4
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "15.mp4", thumbnail: "media/covers/15.jpg", duration: "3:46", note: "" }, // 原文件 IMG_6648.MP4
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "16.mp4", thumbnail: "media/covers/16.jpg", duration: "4:11", note: "" }, // 原文件 IMG_6632.MP4
-  { title: "歌名待填写", videoUrl: VIDEO_BASE + "17.mp4", thumbnail: "media/covers/17.jpg", duration: "5:02", note: "" }, // 原文件 IMG_6729.MP4
+  { title: "Never Let Me Go", videoUrl: VIDEO_BASE + "Never_Let_Me_Go.MP4", thumbnail: "media/covers/01.jpg", duration: "3:34", note: "" }, // 原文件 IMG_5678.MP4
+  { title: "Video Games", videoUrl: VIDEO_BASE + "Video_Games.MP4", thumbnail: "media/covers/02.jpg", duration: "5:38", note: "" }, // 原文件 IMG_5931.MP4
+  { title: "TV in Black and White（即兴乱弹）", videoUrl: VIDEO_BASE + "TV_in_Black_and_White_即兴乱弹.MP4", thumbnail: "media/covers/03.jpg", duration: "3:16", note: "" }, // 原文件 IMG_6298.MP4
+  { title: "Money Power Glory", videoUrl: VIDEO_BASE + "Money_Power_Glory.mp4", thumbnail: "media/covers/04.jpg", duration: "4:15", note: "" }, // 原文件 IMG_6308.MOV
+  { title: "Swan Song", videoUrl: VIDEO_BASE + "Swan_Song.mp4", thumbnail: "media/covers/05.jpg", duration: "5:20", note: "" }, // 原文件 IMG_6345.MOV
+  { title: "West Coast", videoUrl: VIDEO_BASE + "West_Coast.mp4", thumbnail: "media/covers/06.jpg", duration: "4:09", note: "" }, // 原文件 9296.mp4
+  { title: "Radio", videoUrl: VIDEO_BASE + "Radio.MP4", thumbnail: "media/covers/07.jpg", duration: "3:26", note: "" }, // 原文件 IMG_6314.MP4
+  { title: "Love Song", videoUrl: VIDEO_BASE + "Love_Song.mp4", thumbnail: "media/covers/08.jpg", duration: "4:05", note: "" }, // 原文件 IMG_6399.MOV
+  { title: "The Greatest", videoUrl: VIDEO_BASE + "The_Greatest.MP4", thumbnail: "media/covers/09.jpg", duration: "3:39", note: "" }, // 原文件 IMG_6447.MP4
+  { title: "Lust for Life", videoUrl: VIDEO_BASE + "Lust_for_Life.MP4", thumbnail: "media/covers/10.jpg", duration: "3:31", note: "" }, // 原文件 IMG_6430.MP4
+  { title: "Summertime Sadness", videoUrl: VIDEO_BASE + "Summertime_Sadness.MP4", thumbnail: "media/covers/11.jpg", duration: "3:20", note: "" }, // 原文件 IMG_6526.MP4
+  { title: "Love", videoUrl: VIDEO_BASE + "Love.MP4", thumbnail: "media/covers/12.jpg", duration: "5:04", note: "" }, // 原文件 IMG_6507.MP4
+  { title: "Born to Die", videoUrl: VIDEO_BASE + "Born_to_Die.MP4", thumbnail: "media/covers/13.jpg", duration: "4:22", note: "" }, // 原文件 IMG_6537.MP4
+  { title: "Groupie Love", videoUrl: VIDEO_BASE + "Grupie_Love.MP4", thumbnail: "media/covers/14.jpg", duration: "3:52", note: "" }, // 原文件 IMG_6577.MP4
+  { title: "Get Free", videoUrl: VIDEO_BASE + "Get_Free.MP4", thumbnail: "media/covers/15.jpg", duration: "3:46", note: "" }, // 原文件 IMG_6648.MP4
+  { title: "TV in Black and White", videoUrl: VIDEO_BASE + "TV_in_Black_and_White.MP4", thumbnail: "media/covers/16.jpg", duration: "4:11", note: "" }, // 原文件 IMG_6632.MP4
+  { title: "Ride", videoUrl: VIDEO_BASE + "Ride.MP4", thumbnail: "media/covers/17.jpg", duration: "5:02", note: "" }, // 原文件 IMG_6729.MP4
 ];

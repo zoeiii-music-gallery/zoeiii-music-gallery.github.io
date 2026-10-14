@@ -262,14 +262,11 @@
   /* ---------------- 章鱼 & 贴纸彩蛋 ---------------- */
   const STICKERS = {
     octo: `<svg viewBox="0 0 64 64"><g stroke="#292522" stroke-width="2.5" stroke-linecap="round" fill="none"><path d="M20 40c-3 8-6 10-3 14M28 44c-1 7-2 10 1 13M36 44c1 7 2 10-1 13M44 40c3 8 6 10 3 14" stroke="#D9A6A4" stroke-width="6"/></g><ellipse cx="32" cy="28" rx="20" ry="18" fill="#D9A6A4" stroke="#292522" stroke-width="2.5"/><path d="M22 28q3-4 6 0M36 28q3-4 6 0" stroke="#292522" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="20" cy="34" rx="4" ry="2.5" fill="#B5545F" opacity=".7"/><ellipse cx="44" cy="34" rx="4" ry="2.5" fill="#B5545F" opacity=".7"/><path d="M50 10c2 2 2 4 0 6M54 7c3 3 3 9 0 12" stroke="#7A3544" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
-    cat: `<svg viewBox="0 0 64 64"><path d="M14 46V24l6-12 8 10h8l8-10 6 12v22z" fill="#F3E3CF" stroke="#292522" stroke-width="2.5" stroke-linejoin="round"/><path d="M20 12l-3 9 7 2zM44 12l3 9-7 2z" fill="#6B4A3A"/><ellipse cx="32" cy="38" rx="9" ry="6" fill="#6B4A3A" opacity=".85"/><circle cx="25" cy="31" r="2.6" fill="#3E5C76"/><circle cx="39" cy="31" r="2.6" fill="#3E5C76"/><path d="M30 37l2 2 2-2" stroke="#F3E3CF" stroke-width="1.8" fill="none" stroke-linecap="round"/><rect x="6" y="44" width="52" height="10" rx="3" fill="#7A3544" stroke="#292522" stroke-width="2.5"/><path d="M18 44v-3M24 44v-3M40 44v-3M46 44v-3" stroke="#292522" stroke-width="2.5" stroke-linecap="round"/></svg>`,
-    penguin: `<svg viewBox="0 0 64 64"><ellipse cx="32" cy="36" rx="17" ry="22" fill="#292522"/><ellipse cx="32" cy="40" rx="11" ry="15" fill="#FBF6EE"/><circle cx="26" cy="24" r="2.3" fill="#FBF6EE"/><circle cx="38" cy="24" r="2.3" fill="#FBF6EE"/><path d="M27 30h10l-5 5z" fill="#E08A4F" stroke="#292522" stroke-width="1.5" stroke-linejoin="round"/><path d="M22 58h8M34 58h8" stroke="#E08A4F" stroke-width="4" stroke-linecap="round"/><path d="M16 36c-5 4-6 8-5 11M48 36c5 4 6 8 5 11" stroke="#292522" stroke-width="5" stroke-linecap="round" fill="none"/></svg>`,
-    bear: `<svg viewBox="0 0 64 64"><circle cx="18" cy="14" r="7" fill="#A27B5C" stroke="#292522" stroke-width="2.5"/><circle cx="46" cy="14" r="7" fill="#A27B5C" stroke="#292522" stroke-width="2.5"/><ellipse cx="32" cy="27" rx="18" ry="16" fill="#A27B5C" stroke="#292522" stroke-width="2.5"/><circle cx="32" cy="50" r="13" fill="#292522"/><circle cx="32" cy="50" r="4.5" fill="#D9A6A4"/><path d="M24 26h4M36 26h4" stroke="#292522" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="32" cy="32" rx="5" ry="3.5" fill="#E6D2BC"/><circle cx="32" cy="31" r="1.6" fill="#292522"/><ellipse cx="17" cy="47" rx="6" ry="5" fill="#A27B5C" stroke="#292522" stroke-width="2.5"/><ellipse cx="47" cy="47" rx="6" ry="5" fill="#A27B5C" stroke="#292522" stroke-width="2.5"/></svg>`,
-    note: `<svg viewBox="0 0 64 64"><path d="M24 46V14l26-6v32" fill="none" stroke="#7A3544" stroke-width="4" stroke-linejoin="round"/><ellipse cx="18" cy="46" rx="8" ry="6" fill="#7A3544" transform="rotate(-18 18 46)"/><ellipse cx="44" cy="40" rx="8" ry="6" fill="#7A3544" transform="rotate(-18 44 40)"/></svg>`,
-    star: `<svg viewBox="0 0 64 64"><path d="M32 6l6.5 17.5 18.5.8-14.6 11.4 5 18L32 43.3 16.6 53.7l5-18L7 24.3l18.5-.8z" fill="#E9C46A" stroke="#292522" stroke-width="2.5" stroke-linejoin="round"/><circle cx="27" cy="30" r="1.8" fill="#292522"/><circle cx="37" cy="30" r="1.8" fill="#292522"/><path d="M29 35q3 3 6 0" stroke="#292522" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
-    heart: `<svg viewBox="0 0 64 64"><path d="M32 54S8 40 8 23c0-8 6-13 12-13 5 0 9 3 12 7 3-4 7-7 12-7 6 0 12 5 12 13 0 17-24 31-24 31z" fill="#D9A6A4" stroke="#292522" stroke-width="2.5" stroke-linejoin="round"/><path d="M18 20q2-4 6-4" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".7"/></svg>`,
   };
-  const STICKER_KEYS = Object.keys(STICKERS);
+  // Zoeiii 的小表情（media/stickers/01.png ~ 14.png，已抠图加白边）
+  const PICS = Array.from({ length: 14 }, (_, i) => `media/stickers/${String(i + 1).padStart(2, "0")}.png`);
+  PICS.forEach((src) => { new Image().src = src; }); // 预加载，点击时立刻出现
+  const STICKER_KEYS = PICS.map((_, i) => `pic${i}`);
   const MAX_STICKERS = 4;
   const layer = $("#sticker-layer");
   let lastKey = "";
@@ -287,14 +284,14 @@
     el.style.top = `${y}px`;
     el.style.setProperty("--r", `${Math.round(Math.random() * 30 - 15)}deg`);
     el.style.setProperty("--dx", `${Math.round(Math.random() * 40 - 20)}px`);
-    el.innerHTML = STICKERS[key];
+    el.innerHTML = STICKERS[key] || `<img src="${PICS[+key.slice(3)]}" alt="">`;
     layer.appendChild(el);
     const remove = () => el.remove();
     el.addEventListener("animationend", remove, { once: true });
     setTimeout(remove, 2000); // 兜底
   }
 
-  const SAYINGS = ["被你发现啦", "这首也很好听", "偷偷给你留了下一首", "耳机分你一半", "嘿嘿，再戳一下？", "今晚也要好好听歌"];
+  const SAYINGS = ["被你发现啦", "这首也很好听", "下一首也不错哦", "章鱼也在认真听", "八只脚一起打拍子", "听累了记得喝口水"];
   const octoBtn = $(".octo-btn");
   const say = $(".octo-say");
   let sayIdx = 0;
